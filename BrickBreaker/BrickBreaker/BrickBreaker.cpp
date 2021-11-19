@@ -11,17 +11,25 @@ int main()
 	app.setFramerateLimit(60);
 
 	//textures
-	sf::Texture block, background, ball, paddle;
+	sf::Texture block_tex, background_tex, ball_tex, paddle_tex;
 	
-	block.loadFromFile("Data/block01.png");
-	background.loadFromFile("Data/background.png");
-	ball.loadFromFile("Data/ball.png");
-	paddle.loadFromFile("Data/paddle.png");
+	block_tex.loadFromFile("Data/block01.png");
+	background_tex.loadFromFile("Data/background.png");
+	ball_tex.loadFromFile("Data/ball.png");
+	paddle_tex.loadFromFile("Data/paddle.png");
 
-	sf::Sprite sBackground(background), sBall(ball), sPaddle(paddle);
+	sf::RectangleShape background;
+	background.setSize(sf::Vector2f(520, 450));
+	background.setPosition(0, 0);
+	background.setTexture(&background_tex);
 
-	sPaddle.setPosition(300, 440);
-	sBall.setPosition(300, 300);
+	sf::RectangleShape pad;
+	pad.setPosition(300, 440);
+	pad.setTexture(&paddle_tex);
+
+	sf::RectangleShape ball;
+	ball.setPosition(300, 300);
+	ball.setTexture(&ball_tex);
 
 	//setting blocks
 
@@ -30,7 +38,7 @@ int main()
 	int n = 0;
 	for (int i = 1; i <= 10; i++) {
 		for (int j = 1; j <= 10; j++) {
-			blocks[n].setTexture(block);
+			blocks[n].setTexture(block_tex);
 			blocks[n].setPosition(i * 43, j * 20);
 			n++;
 		}
@@ -44,6 +52,11 @@ int main()
 				app.close();
 			}
 		}
+		app.clear();
+		//drawing
+		app.draw(background);
+
+		app.display();
 	}
 
 
