@@ -36,6 +36,15 @@ int main()
 		}
 	}
 
+	//game loop
+	while (app.isOpen()) {
+		sf::Event e;
+		while (app.pollEvent(e)) {
+			if (e.type == sf::Event::Closed) {
+				app.close();
+			}
+		}
+	}
 
 
 
