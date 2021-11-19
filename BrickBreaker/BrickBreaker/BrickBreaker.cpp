@@ -3,10 +3,32 @@
 
 #include "pch.h"
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 int main()
 {
-    std::cout << "Hello World!\n"; 
+	sf::RenderWindow app(sf::VideoMode(520, 450), "BrickBreaker!");
+	app.setFramerateLimit(60);
+
+	//textures
+	sf::Texture block, background, ball, paddle;
+	
+	block.loadFromFile("Data/block01.png");
+	background.loadFromFile("Data/background.jpg");
+	ball.loadFromFile("Data/ball.jpg");
+	paddle.loadFromFile("Data/paddle.jpg");
+
+	sf::Sprite sBackground(background), sBall(ball), sPaddle(paddle);
+
+	sPaddle.setPosition(300, 440);
+	sBall.setPosition(300, 300);
+
+	sf::Sprite blocks[1000];
+
+
+
+
+	return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
