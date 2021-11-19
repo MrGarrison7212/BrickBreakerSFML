@@ -4,6 +4,7 @@
 #include "pch.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 int main()
 {
@@ -18,6 +19,20 @@ int main()
 	int xVelocityPad = 0;
 	int xVelocityBall = -2;
 	int yVelocityBall = -2;
+
+	//sound
+	sf::SoundBuffer pad_hit_buf;
+	sf::SoundBuffer block_hit_buf;
+
+	pad_hit_buf.loadFromFile("Data/padhit.wav");
+	block_hit_buf.loadFromFile("Data/blockhit.wav");
+
+
+	sf::Sound pad_hit;
+	sf::Sound block_hit;
+
+	pad_hit.setBuffer(pad_hit_buf);
+	block_hit.setBuffer(block_hit_buf);
 
 
 	//textures
@@ -81,7 +96,7 @@ int main()
 			}
 		}
 		//LOGIC
-		//pad1
+		//pad
 		if (left == true) {
 			xVelocityPad = -5;
 		}
@@ -129,6 +144,7 @@ int main()
 			if (ball.getGlobalBounds().intersects(blocks[i].getGlobalBounds()) == true) {
 				blocks[i].setPosition(-100, 0);
 				yVelocityBall = -yVelocityBall;
+				block_hit.play();
 			}
 		}
 
@@ -137,12 +153,14 @@ int main()
 			if (ball.getGlobalBounds().intersects(blocks[i].getGlobalBounds()) == true) {
 				blocks[i].setPosition(-100, 0);
 				xVelocityBall = -xVelocityBall;
+				block_hit.play();
 			}
 		}
 
 		//collision with pad
 		if (ball.getGlobalBounds().intersects(pad.getGlobalBounds()) == true) {
 			yVelocityBall = -yVelocityBall;
+			pad_hit.play();
 		}
 
 
