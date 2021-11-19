@@ -14,16 +14,27 @@ int main()
 	sf::Texture block, background, ball, paddle;
 	
 	block.loadFromFile("Data/block01.png");
-	background.loadFromFile("Data/background.jpg");
-	ball.loadFromFile("Data/ball.jpg");
-	paddle.loadFromFile("Data/paddle.jpg");
+	background.loadFromFile("Data/background.png");
+	ball.loadFromFile("Data/ball.png");
+	paddle.loadFromFile("Data/paddle.png");
 
 	sf::Sprite sBackground(background), sBall(ball), sPaddle(paddle);
 
 	sPaddle.setPosition(300, 440);
 	sBall.setPosition(300, 300);
 
+	//setting blocks
+
 	sf::Sprite blocks[1000];
+
+	int n = 0;
+	for (int i = 1; i <= 10; i++) {
+		for (int j = 1; j <= 10; j++) {
+			blocks[n].setTexture(block);
+			blocks[n].setPosition(i * 43, j * 20);
+			n++;
+		}
+	}
 
 
 
