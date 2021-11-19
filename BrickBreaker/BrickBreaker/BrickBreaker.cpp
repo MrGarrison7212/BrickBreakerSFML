@@ -24,11 +24,13 @@ int main()
 	background.setTexture(&background_tex);
 
 	sf::RectangleShape pad;
-	pad.setPosition(300, 440);
+	pad.setSize(sf::Vector2f(90, 9));
+	pad.setPosition(215, 440);
 	pad.setTexture(&paddle_tex);
 
 	sf::RectangleShape ball;
-	ball.setPosition(300, 300);
+	ball.setSize(sf::Vector2f(12, 12));
+	ball.setPosition(254, 300);
 	ball.setTexture(&ball_tex);
 
 	//setting blocks
@@ -55,6 +57,11 @@ int main()
 		app.clear();
 		//drawing
 		app.draw(background);
+		app.draw(pad);
+		app.draw(ball);
+		for (int i = 0; i < n; i++) {
+			app.draw(blocks[i]);
+		}
 
 		app.display();
 	}
