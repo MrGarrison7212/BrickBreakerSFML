@@ -10,6 +10,16 @@ int main()
 	sf::RenderWindow app(sf::VideoMode(520, 450), "BrickBreaker!");
 	app.setFramerateLimit(60);
 
+
+	//states
+	bool left = false;
+	bool right = false;
+	//variables
+	int xVelocityPad = 0;
+	int xVelocityBall = -4;
+	int yVelocityBall = -4;
+
+
 	//textures
 	sf::Texture block_tex, background_tex, ball_tex, paddle_tex;
 	
@@ -53,9 +63,55 @@ int main()
 			if (e.type == sf::Event::Closed) {
 				app.close();
 			}
+			//key pressed
+			if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::Left) {
+				left = true;
+			}
+
+			if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::Right) {
+				right = true;
+			}
+			//key released
+			if (e.type == sf::Event::KeyReleased && e.key.code == sf::Keyboard::Left) {
+				left = false;
+			}
+
+			if (e.type == sf::Event::KeyReleased && e.key.code == sf::Keyboard::Right) {
+				right = false;
+			}
 		}
+		//LOGIC
+		//pad1
+		if (left == true) {
+			xVelocityPad = -5;
+		}
+
+		if (right == true) {
+			xVelocityPad = 5;
+		}
+
+		if (left == true && right == true) {
+			xVelocityPad = 0;
+		}
+
+		if (left == false && right == false) {
+			xVelocityPad = 0;
+		}
+
+
+		pad.move(xVelocityPad, 0);
+
+		//pad out of bounds
+		if (pad.getPosition().x < 0) {
+			pad.setPosition(0, 440);
+		}
+
+		if (pad.getPosition().x > 430) {
+			pad.setPosition(430, 440);
+		}
+
+		//rendering
 		app.clear();
-		//drawing
 		app.draw(background);
 		app.draw(pad);
 		app.draw(ball);
