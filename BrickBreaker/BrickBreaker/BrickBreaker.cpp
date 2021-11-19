@@ -125,6 +125,11 @@ int main()
 
 		ball.move(xVelocityBall, yVelocityBall);
 
+
+		//collision with pad
+		if (ball.getGlobalBounds().intersects(pad.getGlobalBounds()) == true) {
+			yVelocityBall = -yVelocityBall;
+		}
 		//rendering
 		app.clear();
 		app.draw(background);
