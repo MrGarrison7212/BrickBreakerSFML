@@ -16,8 +16,8 @@ int main()
 	bool right = false;
 	//variables
 	int xVelocityPad = 0;
-	int xVelocityBall = -4;
-	int yVelocityBall = -4;
+	int xVelocityBall = -2;
+	int yVelocityBall = -2;
 
 
 	//textures
@@ -26,7 +26,7 @@ int main()
 	block_tex.loadFromFile("Data/block01.png");
 	background_tex.loadFromFile("Data/background.png");
 	ball_tex.loadFromFile("Data/ball.png");
-	paddle_tex.loadFromFile("Data/paddle.png");
+	paddle_tex.loadFromFile("Data/pad.png");
 
 	sf::RectangleShape background;
 	background.setSize(sf::Vector2f(520, 450));
@@ -123,13 +123,30 @@ int main()
 			yVelocityBall = -yVelocityBall;
 		}
 
-		ball.move(xVelocityBall, yVelocityBall);
+		ball.move(0, yVelocityBall);
+		//collision with blocks
+		for (int i = 0; i < n; i++) {
+			if (ball.getGlobalBounds().intersects(blocks[i].getGlobalBounds()) == true) {
+				blocks[i].setPosition(-100, 0);
+				yVelocityBall = -yVelocityBall;
+			}
+		}
 
+		ball.move(xVelocityBall, 0);
+		for (int i = 0; i < n; i++) {
+			if (ball.getGlobalBounds().intersects(blocks[i].getGlobalBounds()) == true) {
+				blocks[i].setPosition(-100, 0);
+				xVelocityBall = -xVelocityBall;
+			}
+		}
 
 		//collision with pad
 		if (ball.getGlobalBounds().intersects(pad.getGlobalBounds()) == true) {
 			yVelocityBall = -yVelocityBall;
 		}
+
+
+		
 		//rendering
 		app.clear();
 		app.draw(background);
