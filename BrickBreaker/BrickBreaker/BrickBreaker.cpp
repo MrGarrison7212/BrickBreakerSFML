@@ -110,6 +110,21 @@ int main()
 			pad.setPosition(430, 440);
 		}
 
+		//ball
+		if (ball.getPosition().x < 0) {
+			xVelocityBall = -xVelocityBall;
+		}
+
+		if (ball.getPosition().x > 502) {
+			xVelocityBall = -xVelocityBall;
+		}
+
+		if (ball.getPosition().y < 0) {
+			yVelocityBall = -yVelocityBall;
+		}
+
+		ball.move(xVelocityBall, yVelocityBall);
+
 		//rendering
 		app.clear();
 		app.draw(background);
