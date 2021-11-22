@@ -138,6 +138,11 @@ int main()
 			yVelocityBall = -yVelocityBall;
 		}
 
+		//out of bounds ball
+		if (ball.getPosition().y > 450) {
+			ball.setPosition(254, 300);
+		}
+
 		ball.move(0, yVelocityBall);
 		//collision with blocks
 		for (int i = 0; i < n; i++) {
